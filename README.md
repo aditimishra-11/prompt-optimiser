@@ -1,17 +1,26 @@
 # Prompt Optimiser Agent
+
 An autonomous LangGraph agent that finds the best prompt for any task — by running a seed prompt against test cases, scoring outputs with an LLM judge, diagnosing weaknesses, and rewriting the prompt iteratively until it converges.
+
 You run it once per use case. It hands you a prompt. You use that prompt in Claude or ChatGPT for your daily work.
+
 ---
+
 ## How it works
+
 ```
 seed prompt → run on test cases → score → diagnose weakness → rewrite → loop → best prompt
 ```
+
 The agent runs autonomously until one of three conditions is met:
 - Score reaches the target threshold (default 9.2/10)
 - Score plateaus — less than 0.15 improvement over 3 consecutive iterations
 - Maximum iterations reached (default 20)
+
 ---
+
 ## Project structure
+
 ```
 prompt-optimiser/
 ├── CLAUDE.md                        # Persistent context for Claude Code sessions
@@ -36,27 +45,38 @@ prompt-optimiser/
 ├── runs/                            # Auto-generated run logs (JSON, one per run)
 └── dashboard.py                     # Streamlit score curve + diff visualisation
 ```
+
 ---
+
 ## Setup
+
 ### 1. Clone and install
+
 ```bash
 git clone <your-repo-url>
 cd prompt-optimiser
 pip install -r requirements.txt
 ```
+
 ### 2. Configure environment
+
 ```bash
 cp .env.example .env
 ```
+
 Open `.env` and fill in:
+
 ```
 OPENAI_API_KEY=sk-proj-...
 LANGCHAIN_API_KEY=ls__...
 LANGCHAIN_TRACING_V2=true
 LANGCHAIN_PROJECT=prompt-optimiser
 ```
+
 > **LangSmith** (optional but recommended): sign up free at [smith.langchain.com](https://smith.langchain.com). It gives you a visual trace of every iteration — what the agent tried, why it rewrote the prompt, and how scores evolved.
+
 ### 3. Run the agent on an existing use case
+
 ```bash
 python3 main.py \
   --task "rewrite a weak CV bullet into a strong impact-first quantified bullet" \
@@ -64,20 +84,29 @@ python3 main.py \
   --test-cases test_cases/cv_bullet_test_cases.json \
   --seed-prompt "Rewrite this CV bullet to be stronger and more impactful."
 ```
+
 ### 4. View the dashboard
+
 ```bash
 streamlit run dashboard.py
 ```
+
 Opens a browser showing: score curve across iterations, best prompt found, side-by-side diff of seed vs best prompt.
+
 ---
+
 ## Ready-to-use cases
+
 Three use cases are already set up with rubrics and test cases:
+
 | Use case | Rubric | Test cases | Seed prompt |
 |---|---|---|---|
 | CV bullet rewriter | `rubrics/cv_bullet_rubric.json` | `test_cases/cv_bullet_test_cases.json` | `"Rewrite this CV bullet to be stronger and more impactful."` |
 | CV vs JD match | `rubrics/cv_jd_match_rubric.json` | `test_cases/cv_jd_match_test_cases.json` | `"Compare this CV against the job description and tell me how well I match."` |
 | Cold outreach message | `rubrics/cold_outreach_rubric.json` | `test_cases/cold_outreach_test_cases.json` | `"Write a cold LinkedIn message to the hiring manager for this role."` |
+
 Run commands for each:
+
 ```bash
 # CV bullet rewriter
 python3 main.py \
@@ -85,12 +114,14 @@ python3 main.py \
   --rubric rubrics/cv_bullet_rubric.json \
   --test-cases test_cases/cv_bullet_test_cases.json \
   --seed-prompt "Rewrite this CV bullet to be stronger and more impactful."
+
 # CV vs JD match
 python3 main.py \
   --task "analyse how well a CV matches a job description and give specific improvement actions" \
   --rubric rubrics/cv_jd_match_rubric.json \
   --test-cases test_cases/cv_jd_match_test_cases.json \
   --seed-prompt "Compare this CV against the job description and tell me how well I match."
+
 # Cold outreach
 python3 main.py \
   --task "write a cold LinkedIn outreach message to a hiring manager that gets a reply" \
@@ -98,11 +129,17 @@ python3 main.py \
   --test-cases test_cases/cold_outreach_test_cases.json \
   --seed-prompt "Write a cold LinkedIn message to the hiring manager for this role."
 ```
+
 ---
+
 ## Adding a new use case
+
 To optimise a prompt for any new task, you need two files and one command. The agent code never changes.
+
 ### Step 1 — Write your rubric
+
 Create `rubrics/your_task_rubric.json`. The rubric defines what "good output" looks like — dimensions, weights, and scoring guidance for the judge.
+
 ```json
 {
   "task": "One sentence describing what the prompt is supposed to do",
@@ -122,13 +159,17 @@ Create `rubrics/your_task_rubric.json`. The rubric defines what "good output" lo
   ]
 }
 ```
+
 **Rules for a good rubric:**
 - Weights must sum to 1.0
 - Use 2–5 dimensions — more than 5 confuses the judge
 - The `scoring_guide` for 9-10 must be strict and specific — if it's easy to score 9+, the agent converges too fast
 - Add `"scoring_calibration"` to tell the judge to score hard — without it the judge is generous and the agent stops iterating too early
+
 ### Step 2 — Write your test cases
+
 Create `test_cases/your_task_test_cases.json`. Test cases are synthetic inputs that stress-test the prompt — they are not real data.
+
 ```json
 [
   {
@@ -143,13 +184,16 @@ Create `test_cases/your_task_test_cases.json`. Test cases are synthetic inputs t
   }
 ]
 ```
+
 **Rules for good test cases:**
 - Write 8 minimum — fewer than 6 gives the agent too narrow a view of the task
 - Cover the full range: ideal input, vague input, edge case, domain-specific, minimal info
 - `input` can be a plain string or a dict with named fields — both work
 - `expected_output` is optional but helps the judge score more accurately
 - Diversity beats quantity — 8 varied cases is better than 20 similar ones
+
 **Checklist for 8 test cases:**
+
 | # | Type | Why |
 |---|---|---|
 | 1 | Ideal input | Sets the quality ceiling |
@@ -160,7 +204,9 @@ Create `test_cases/your_task_test_cases.json`. Test cases are synthetic inputs t
 | 6 | Overloaded input | Too much information — tests conciseness |
 | 7 | Ambiguous input | Multiple valid interpretations |
 | 8 | Real-world messy input | Realistic imperfect input |
+
 ### Step 3 — Run the agent
+
 ```bash
 python3 main.py \
   --task "one sentence describing what the prompt should do" \
@@ -168,37 +214,58 @@ python3 main.py \
   --test-cases test_cases/your_task_test_cases.json \
   --seed-prompt "Your starting prompt — intentionally simple is fine."
 ```
+
 ### Step 4 — Read the output
+
 When the run finishes, the terminal prints:
+
 ```
 Best score : 8.9
 Best prompt:
 [the optimised prompt text]
+
 Run log saved to runs/abc123_20240115_143022.json
 ```
+
 Copy the best prompt. Use it in Claude.ai or ChatGPT for your daily work.
+
 ### Step 5 — Use the best prompt
+
 Open Claude.ai. Paste the best prompt as your first message, then paste your real input. That's it.
+
 ```
 [paste best prompt here]
+
 [paste your real input here]
 ```
+
 ---
+
 ## Tuning the agent
+
 If the agent converges too fast (finishes in 0-2 iterations), make these changes:
+
 **Raise the convergence threshold** in `nodes/convergence.py`:
 ```python
 TARGET_SCORE = 9.2   # default is 8.5 — raise to force more iterations
 ```
+
 **Tighten the rubric** — make the 9-10 scoring criteria stricter so the judge scores harder. Add or sharpen the `scoring_calibration` field.
+
 **Use a weaker seed prompt** — starting from `"Do X."` forces the agent to do more rewriting than starting from a detailed instruction.
+
 If the agent takes too long (over 10 minutes), check:
+
 - `score_output.py` uses `asyncio.gather` for parallel scoring — if not, add it
 - Reduce to 4–5 test cases for faster iteration during development
 - Switch `run_prompt` model from `gpt-4o` to `gpt-4o-mini` if inputs are simple
+
 ---
+
 ## How to read the run log
+
 Every run saves a JSON file to `runs/`. Key fields:
+
 ```json
 {
   "best_prompt": "the best prompt found",
@@ -211,21 +278,31 @@ Every run saves a JSON file to `runs/`. Key fields:
   "iteration": 5
 }
 ```
+
 `weakness_log` shows you exactly what the agent diagnosed each round — useful for understanding what dimensions your seed prompt was missing.
+
 ---
+
 ## Frequently asked questions
+
 **Do I use real data in test cases?**
 No. Test cases are synthetic stress-test inputs written to cover edge cases. Your real CV, JDs, or messages are never used during the optimisation run.
+
 **How often do I rerun the agent?**
 Once per use case — unless your needs change (new role type, new industry, new output format). The optimised prompt is stable.
+
 **The score isn't improving — what do I do?**
 1. Check the `weakness_log` in the run JSON — if the agent keeps diagnosing the same weakness, the rewriter is stuck
 2. Try a different seed prompt that addresses the stuck dimension directly
 3. Tighten the rubric's 9-10 scoring criteria to give the rewriter a clearer target
+
 **Can I use this for non-job-search tasks?**
 Yes — anything where you have a repeatable prompt task works. Summarisation, email drafting, code review instructions, product critique, customer support responses. Write a rubric + test cases for it and run.
+
 ---
+
 ## Stack
+
 | Component | Tool |
 |---|---|
 | Agent orchestration | LangGraph |
