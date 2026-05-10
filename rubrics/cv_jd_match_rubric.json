@@ -1,0 +1,50 @@
+{
+  "task": "Analyse how well a CV matches a job description and give specific, actionable improvement recommendations",
+  "scoring_calibration": "Be strict. Reserve 9-10 only for analyses that a senior recruiter or hiring manager would find genuinely useful — specific, honest, and immediately actionable. Generic advice like 'add more metrics' or 'tailor your CV' with no concrete guidance scores 1-4. Most outputs should score 5-7. An output that inflates the match percentage to make the applicant feel good scores max 4.",
+  "dimensions": [
+    {
+      "name": "gap_identification",
+      "description": "Does the analysis identify real, specific gaps between the CV and JD — not just obvious surface-level ones? Gaps must reference specific JD requirements that are missing or weak in the CV. Saying 'you lack leadership experience' when the JD mentions 'led cross-functional teams of 10+' scores 8-10. Saying 'you could improve your skills section' with no JD reference scores 1-3.",
+      "weight": 0.35,
+      "scoring_guide": {
+        "1-3": "Generic gaps with no JD reference. Could apply to any CV for any job.",
+        "4-6": "Identifies some real gaps but misses the most critical ones or lacks JD specificity.",
+        "7-8": "Identifies 3+ specific gaps directly tied to JD language and requirements.",
+        "9-10": "Identifies all critical gaps with exact JD quotes or requirements. Prioritises gaps by impact on application success."
+      }
+    },
+    {
+      "name": "actionability",
+      "description": "Does each identified gap come with a specific, concrete fix? 'Add more metrics to your bullets' scores 1-3. 'Rewrite your Practo bullet to mention the 200k patient scale — the JD specifically asks for experience with high-volume consumer products' scores 9-10. Every gap must have a corresponding action.",
+      "weight": 0.30,
+      "scoring_guide": {
+        "1-3": "Vague suggestions. 'Tailor your CV to the role', 'highlight relevant experience'.",
+        "4-6": "Has suggestions but they're generic — not tied to specific CV bullets or JD requirements.",
+        "7-8": "Each gap has a concrete fix that names the specific CV section or bullet to change.",
+        "9-10": "Each fix includes: which CV bullet to change, what to add/remove, and why it matters for this specific JD."
+      }
+    },
+    {
+      "name": "match_score_honesty",
+      "description": "Is the match percentage or rating calibrated and honest? An output that gives 85% match when the CV is clearly missing 3 major JD requirements is dishonest and useless. The score should reflect real alignment — including hard gaps like missing years of experience, required technical skills, or domain experience the CV lacks entirely.",
+      "weight": 0.20,
+      "scoring_guide": {
+        "1-3": "Inflated match score. Calls a weak match 'strong' or gives 80%+ with obvious gaps.",
+        "4-6": "Match score is in the right ballpark but not calibrated to specific gap severity.",
+        "7-8": "Honest match score with clear reasoning tied to specific gaps.",
+        "9-10": "Match score is honest, broken down by dimension (e.g. skills: 70%, experience: 50%, domain: 90%), and explains what would move the score up."
+      }
+    },
+    {
+      "name": "emphasis_guidance",
+      "description": "Does the output tell the applicant which existing CV bullets to move up, reword, or emphasise for this specific JD? Just identifying gaps is not enough — the applicant also needs to know which of their existing strengths to surface more prominently. 'Your Practo bullet about the AI symptom checker should be your first bullet — it directly matches the JD's AI triage requirement' scores 9-10.",
+      "weight": 0.15,
+      "scoring_guide": {
+        "1-3": "No guidance on what to emphasise. Only lists what's missing.",
+        "4-6": "Vague emphasis guidance — 'highlight your healthcare experience' with no specifics.",
+        "7-8": "Names specific CV sections or experiences to move up or expand.",
+        "9-10": "Names specific bullets by content, says where to move them and why, tied to specific JD language."
+      }
+    }
+  ]
+}

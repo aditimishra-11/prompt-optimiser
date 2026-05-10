@@ -1,0 +1,50 @@
+{
+  "task": "Rewrite a weak CV bullet into a strong, impact-first, quantified bullet point suitable for a PM or tech role application",
+  "scoring_calibration": "Be strict. Reserve 9-10 only for bullets that would make a senior recruiter or hiring manager stop and take notice. A bullet with no metric scores max 6. Most rewrites should score 5-7. Generic rewrites that just add action verbs without substance score 1-4.",
+  "dimensions": [
+    {
+      "name": "impact_first",
+      "description": "Does the bullet lead with the outcome or result, not the activity? Bullets starting with 'Responsible for', 'Worked on', 'Helped with', or 'Managed' score 1-3. Bullets that bury the result at the end score 4-6. Bullets where the first 4 words communicate the value delivered score 8-10.",
+      "weight": 0.35,
+      "scoring_guide": {
+        "1-3": "Starts with activity or responsibility. 'Managed a team of engineers to build a feature.'",
+        "4-6": "Has impact but it's buried. 'Led cross-functional team to ship onboarding flow, improving activation by 22%.'",
+        "7-8": "Impact comes early but not in the very first words.",
+        "9-10": "First 4 words communicate the value. 'Increased activation 22% by shipping a redesigned onboarding flow with a 6-person team.'"
+      }
+    },
+    {
+      "name": "quantified",
+      "description": "Does the bullet include at least one specific metric — a number, percentage, dollar amount, time saved, or scale indicator? Vague words like 'significantly', 'greatly', 'substantially' score 1-3. A single concrete number scores 7-8. Multiple metrics or a metric with context (baseline + improvement) scores 9-10.",
+      "weight": 0.30,
+      "scoring_guide": {
+        "1-3": "No metric at all, or uses vague qualifiers like 'significantly improved'.",
+        "4-6": "Has a metric but it's weak context — e.g. team size only, or a time duration with no outcome.",
+        "7-8": "One clear metric — percentage, revenue, users, time saved.",
+        "9-10": "Two metrics OR one metric with baseline context. '34% reduction (from 8min to 5min)'."
+      }
+    },
+    {
+      "name": "specificity",
+      "description": "Does the bullet name specific tools, methods, teams, or decisions? Generic verbs like 'leveraged', 'utilised', 'facilitated' with no object score 1-3. Named technologies, frameworks, team structures, or methodologies score 8-10.",
+      "weight": 0.20,
+      "scoring_guide": {
+        "1-3": "Only generic verbs. 'Leveraged data to improve the product experience.'",
+        "4-6": "Some specificity but still vague. 'Used analytics tools to track user behaviour.'",
+        "7-8": "Names one specific thing — a tool, a team, or a method.",
+        "9-10": "Names multiple specifics or one highly specific technical/methodological detail. 'Used Mixpanel funnel analysis to identify drop-off at step 3 of checkout.'"
+      }
+    },
+    {
+      "name": "conciseness",
+      "description": "Is the bullet under 20 words? Does every word earn its place? Filler phrases like 'in order to', 'as a result of', 'with the goal of', 'responsible for ensuring' score 1-3. Clean, tight bullets under 20 words score 9-10.",
+      "weight": 0.15,
+      "scoring_guide": {
+        "1-3": "Over 30 words or contains multiple filler phrases.",
+        "4-6": "20-30 words, some filler remains.",
+        "7-8": "Under 25 words, mostly clean.",
+        "9-10": "Under 20 words. Every word is load-bearing. No filler."
+      }
+    }
+  ]
+}

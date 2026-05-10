@@ -1,0 +1,82 @@
+[
+  {
+    "id": "tc_001",
+    "tags": ["strong_match", "healthtech", "ideal"],
+    "description": "Strong match — applicant background closely mirrors the JD",
+    "input": {
+      "jd": "Senior PM at an AI healthtech startup building clinical decision support tools for hospitals. Requirements: 4+ years PM experience, prior healthtech or clinical workflow experience, experience shipping AI or ML-powered features, ability to work with clinical stakeholders, Series A company of 35 people.",
+      "cv_summary": "4 years PM at Practo. Shipped an AI symptom checker used by 200k patients/month. Led clinical workflow integrations with 12 hospital partners. Managed a team of 6 engineers and 2 designers. Previously 2 years as business analyst at a hospital chain."
+    },
+    "expected_output": "High match score (75-85%) with specific guidance on which bullets to lead with. Should identify any remaining gaps — e.g. if the CV doesn't mention Series A or small-team experience — and suggest how to address them. Should not inflate to 95%+."
+  },
+  {
+    "id": "tc_002",
+    "tags": ["career_change", "consulting_to_pm", "gap"],
+    "description": "Career changer — strong background but no PM title",
+    "input": {
+      "jd": "PM at a fintech startup building SMB lending products. Requirements: 2+ years PM experience, data-driven, experience with financial products or lending, ability to own a product end to end.",
+      "cv_summary": "5 years management consulting at Deloitte. Led a digital lending transformation for a top-5 Indian bank — built the loan origination workflow, reduced approval time by 40%. MBA from IIM-A. No formal PM title."
+    },
+    "expected_output": "Should honestly flag the missing PM title as a real gap but show how to bridge it using the lending project. Should suggest reframing the consulting project as product ownership. Match score should be 50-65% — not inflated. Should give specific bullet rewrites."
+  },
+  {
+    "id": "tc_003",
+    "tags": ["weak_match", "domain_mismatch"],
+    "description": "Weak match — applicant from a different domain with few transferable signals",
+    "input": {
+      "jd": "PM at a cybersecurity SaaS company building enterprise threat detection products. Requirements: 3+ years PM in B2B SaaS, security domain knowledge preferred, experience with complex enterprise sales cycles.",
+      "cv_summary": "3 years PM at a consumer food delivery app. Shipped loyalty programme, push notification optimisation, and restaurant onboarding flow. No security or enterprise experience."
+    },
+    "expected_output": "Should give an honest low match score (30-45%). Should not pretend consumer PM experience directly transfers. Should identify the 1-2 genuine transferable signals (e.g. B2B onboarding) and be honest about what's missing. Should advise whether to apply or upskill first."
+  },
+  {
+    "id": "tc_004",
+    "tags": ["overqualified", "senior_to_mid"],
+    "description": "Overqualified applicant — seniority mismatch",
+    "input": {
+      "jd": "Associate PM at an early-stage startup. 0-2 years experience. Looking for someone hungry, scrappy, willing to do everything from user research to writing specs.",
+      "cv_summary": "7 years PM experience. Currently Senior PM at Flipkart leading a team of 4 PMs. Led 3 product launches with 10M+ users. MBA from ISB."
+    },
+    "expected_output": "Should flag the overqualification gap directly — it's a real concern for the hiring manager. Should advise on how to reframe the CV to address it, e.g. removing management emphasis and highlighting individual contributor work. Honest match score around 40-55%."
+  },
+  {
+    "id": "tc_005",
+    "tags": ["good_cv_vague_jd", "hard_to_match"],
+    "description": "Strong CV but extremely vague JD — hard to match specifically",
+    "input": {
+      "jd": "Product Manager at a fast-growing tech company. Must be passionate, data-driven, collaborative, and have a growth mindset. Competitive salary.",
+      "cv_summary": "4 years PM in B2B SaaS. Shipped an analytics product from 0 to $1.2M ARR. Led growth experiments that increased trial-to-paid conversion by 28%. Strong SQL skills, experience with Mixpanel and Amplitude."
+    },
+    "expected_output": "Should acknowledge the JD is too vague to do a precise match. Should suggest which CV elements are universally strong signals regardless of the specific role. Should not pretend to do a detailed gap analysis when the JD gives nothing to gap against."
+  },
+  {
+    "id": "tc_006",
+    "tags": ["technical_role", "missing_hard_skills"],
+    "description": "PM role with hard technical requirements the applicant partially lacks",
+    "input": {
+      "jd": "Technical PM at a developer tools company. Requirements: 3+ years PM experience, prior software engineering background or CS degree required, experience with API products and developer workflows, familiarity with SDKs and integration patterns.",
+      "cv_summary": "3 years PM at a no-code SaaS tool. Business degree, no engineering background. Worked closely with engineers but never coded. Shipped 2 API integrations with third-party tools as a PM."
+    },
+    "expected_output": "Should flag the missing engineering background as a hard gap — not softened. Should show how the API integration experience partially bridges it. Should give a match score around 45-60%. Should advise whether to highlight the API work more prominently or address the gap in a cover letter."
+  },
+  {
+    "id": "tc_007",
+    "tags": ["keyword_mismatch", "ats_risk"],
+    "description": "Good experience but CV uses different language than the JD",
+    "input": {
+      "jd": "Growth PM. Requirements: experience with acquisition funnels, activation optimisation, retention loops, north star metric definition, and experimentation frameworks.",
+      "cv_summary": "3 years PM. Ran A/B tests to improve sign-up flow — increased registrations by 34%. Improved day-7 retention by 18% through onboarding redesign. Defined the team's primary KPI as weekly active users. Led user acquisition campaigns."
+    },
+    "expected_output": "Should identify that the experience is actually a strong match but the CV language doesn't mirror the JD terminology. Should give specific keyword substitutions — e.g. 'activation optimisation' instead of 'improved sign-up flow', 'retention loops' instead of 'day-7 retention'. ATS risk should be called out."
+  },
+  {
+    "id": "tc_008",
+    "tags": ["location_visa", "practical_constraint"],
+    "description": "Good match on skills but practical constraints exist",
+    "input": {
+      "jd": "PM at a Series B company in Bangalore. Requires: 3+ years PM experience in consumer apps, strong Hindi communication skills for working with local ops teams, must be based in Bangalore or willing to relocate immediately.",
+      "cv_summary": "3 years PM at a consumer app in Mumbai. Strong match on skills. Currently based in Mumbai. Willing to relocate but needs 2 months notice. Hindi fluent."
+    },
+    "expected_output": "Should not ignore the relocation timeline constraint — it's a real practical issue. Should advise how to address it in the application (e.g. mention willingness to relocate in cover note). Should give an honest match score that accounts for the practical gap. Should not pretend it's a non-issue."
+  }
+]

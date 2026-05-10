@@ -1,0 +1,84 @@
+[
+  {
+    "id": "tc_001",
+    "tags": ["ideal", "healthtech", "strong_match"],
+    "description": "Strong match — applicant experience directly mirrors the role",
+    "input": {
+      "jd": "Senior PM at an early-stage healthtech startup building AI-powered clinical triage tools for hospitals. Looking for someone with 3+ years PM experience, ideally in digital health or clinical workflows. We're a Series A company of 40 people.",
+      "applicant": "4 years PM at Practo, shipped an AI symptom checker used by 200k patients per month, led a team of 6 engineers and 2 designers, reduced average triage time by 34%"
+    },
+    "expected_output": "Short message (3–4 sentences) referencing the AI triage angle specifically. Connects applicant's symptom checker work and triage metric directly. Ends with a soft, specific ask like '15 minutes this week?'."
+  },
+  {
+    "id": "tc_002",
+    "tags": ["vague_jd", "hard_to_personalise"],
+    "description": "Vague JD — no specifics to latch onto",
+    "input": {
+      "jd": "Product Manager at a fast-growing tech company. Must be passionate, data-driven, and a team player. Competitive salary and great culture.",
+      "applicant": "3 years PM experience in B2B SaaS, led a 0-to-1 analytics product that reached $1.2M ARR in 18 months"
+    },
+    "expected_output": "Should not invent specifics about the company. Should lead with the applicant's concrete B2B SaaS achievement instead. Does not use hollow phrases like 'your company's exciting vision'."
+  },
+  {
+    "id": "tc_003",
+    "tags": ["career_change", "no_pm_title"],
+    "description": "Career transition — strong background, no PM title yet",
+    "input": {
+      "jd": "PM at a fintech company building lending products for SMBs in India. 2+ years PM experience preferred.",
+      "applicant": "5 years in management consulting (McKinsey), led a digital lending transformation project for a top-5 Indian bank, no formal PM title, MBA from ISB"
+    },
+    "expected_output": "Bridges consulting-to-PM credibly using the lending project as evidence. Does not over-apologise for lacking a PM title. Confident tone."
+  },
+  {
+    "id": "tc_004",
+    "tags": ["senior_role", "director_level"],
+    "description": "Senior / Director-level role — applicant is a strong fit",
+    "input": {
+      "jd": "Director of Product at a Series B edtech company scaling operations from India to Southeast Asia. Looking for someone who has led platform-level products and managed PMs.",
+      "applicant": "8 years in product, currently Senior PM at BYJU'S, led international expansion of the live tutoring product into 3 SEA markets, manages a team of 4 PMs"
+    },
+    "expected_output": "Matches the seniority and tone of a Director-level hire. References SEA expansion experience and team leadership directly. Confident and concise, not sycophantic."
+  },
+  {
+    "id": "tc_005",
+    "tags": ["minimal_applicant_info", "sparse_input"],
+    "description": "Very little applicant info — agent must work with almost nothing",
+    "input": {
+      "jd": "PM at a B2C consumer app focused on growth and retention. 2+ years experience. Mumbai-based.",
+      "applicant": "PM for 2 years at a startup"
+    },
+    "expected_output": "Should write the strongest possible message with limited info — does not fabricate experience. May ask a clarifying question or lead with curiosity about the role. Does not sound desperate."
+  },
+  {
+    "id": "tc_006",
+    "tags": ["overqualified", "seniority_mismatch"],
+    "description": "Applicant is overqualified for the role",
+    "input": {
+      "jd": "Associate PM at an early-stage startup, 0–2 years experience preferred. Scrappy, hungry, willing to wear many hats.",
+      "applicant": "6 years PM at Flipkart and Swiggy, led 3 major product launches with 10M+ users"
+    },
+    "expected_output": "Addresses the seniority gap proactively and convincingly — shows genuine interest in early-stage work without sounding like they're settling. Does not pretend the gap doesn't exist."
+  },
+  {
+    "id": "tc_007",
+    "tags": ["no_hiring_manager_name", "anonymous"],
+    "description": "No hiring manager name available",
+    "input": {
+      "jd": "Growth PM at a climate tech startup building carbon tracking tools for enterprises. Series A, 25-person team.",
+      "applicant": "3 years growth PM, grew a D2C sustainability brand from 0 to 50k monthly active users, ran 40+ A/B tests",
+      "hiring_manager_name": null
+    },
+    "expected_output": "Does not use 'Dear Sir/Madam' or 'To Whom It May Concern'. Addresses the team or the role naturally. Opener should not rely on a name to feel personal."
+  },
+  {
+    "id": "tc_008",
+    "tags": ["referral", "warm_intro"],
+    "description": "Applicant has a referral from a mutual connection",
+    "input": {
+      "jd": "PM at a Series A SaaS company building workforce management tools for HR teams. Looking for someone with HRtech or enterprise SaaS experience.",
+      "applicant": "2 years PM at Darwinbox (HRtech), shipped a performance management module used by 80 enterprise clients",
+      "extra_context": "The applicant was referred by Priya Sharma, who is an engineer at the company and a mutual connection of both parties"
+    },
+    "expected_output": "Opens with the referral naturally in the first sentence — it's the strongest card to play. Does not over-lean on it — still leads with the applicant's relevant HRtech experience. Referral mention is warm, not name-droppy."
+  }
+]

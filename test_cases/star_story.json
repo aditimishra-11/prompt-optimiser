@@ -1,0 +1,50 @@
+[
+  {
+    "id": "tc_001",
+    "input": "- led a project\n- improved things\n- team was happy",
+    "expected_output": "",
+    "tags": ["vague", "minimal"]
+  },
+  {
+    "id": "tc_002",
+    "input": "- migrated monolith to microservices on k8s\n- reduced p99 latency from 800ms to 120ms\n- team of 6 engineers, 9 month timeline\n- used istio service mesh, argocd for gitops\n- reduced infra cost by 34%",
+    "expected_output": "",
+    "tags": ["technical", "detailed"]
+  },
+  {
+    "id": "tc_003",
+    "input": "- did stuff at my last job",
+    "expected_output": "",
+    "tags": ["vague", "ambiguous", "short"]
+  },
+  {
+    "id": "tc_004",
+    "input": "- launched new feature\n- users liked it\n- helped company grow",
+    "expected_output": "",
+    "tags": ["vague", "missing_metrics"]
+  },
+  {
+    "id": "tc_005",
+    "input": "- owned checkout redesign for e-commerce platform\n- previous checkout had 68% drop-off rate\n- ran 12 A/B tests over 6 weeks\n- reduced drop-off to 41%\n- generated additional $2.3M ARR\n- collaborated with design, engineering, and finance teams",
+    "expected_output": "Situation: Our e-commerce checkout had a 68% drop-off rate, significantly hurting revenue. Task: As PM, I owned a full checkout redesign to reduce friction and recover lost conversions. Action: I ran 12 A/B tests over 6 weeks in collaboration with design, engineering, and finance to iteratively improve the flow. Result: Drop-off fell to 41%, generating an additional $2.3M in ARR.",
+    "tags": ["ideal", "metrics_rich"]
+  },
+  {
+    "id": "tc_006",
+    "input": "- reduced churn\n- worked with customer success\n- built some dashboards",
+    "expected_output": "",
+    "tags": ["ambiguous", "incomplete"]
+  },
+  {
+    "id": "tc_007",
+    "input": "- Q4 OKR: improve NPS from 32 to 45\n- identified top 3 pain points via 80 user interviews\n- shipped in-app onboarding flow (3 engineers, 4 weeks)\n- shipped proactive support nudges\n- NPS reached 47 by end of quarter\n- churn dropped 18%",
+    "expected_output": "",
+    "tags": ["metrics_rich", "multi_initiative"]
+  },
+  {
+    "id": "tc_008",
+    "input": "- data pipeline was slow\n- worked with data engineering\n- things improved",
+    "expected_output": "",
+    "tags": ["vague", "technical_domain"]
+  }
+]

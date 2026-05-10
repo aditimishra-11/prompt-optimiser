@@ -1,0 +1,50 @@
+{
+  "task": "Write a cold LinkedIn message to a hiring manager that gets a reply",
+  "description": "Given a job description and a brief about the applicant, generate a short, personalised cold outreach message that a hiring manager would actually respond to. The message must feel human, specific, and respectful of the reader's time.",
+  "dimensions": [
+    {
+      "name": "personalisation",
+      "description": "Does the message reference something specific about this company, team, or role — not generic praise? A message that could be copy-pasted to any company scores 1–3. One that references the company's specific product, recent news, or mission scores 8–10.",
+      "weight": 0.35,
+      "scoring_guide": {
+        "1-3": "Generic opener. 'I love your company' or 'I'm excited about this opportunity' with no specifics.",
+        "4-6": "Mentions the company name or role title but no deeper specificity.",
+        "7-8": "References something real about the company — product, mission, recent milestone.",
+        "9-10": "Hyper-specific: cites a particular feature, article, funding round, or team achievement that shows genuine research."
+      }
+    },
+    {
+      "name": "relevance",
+      "description": "Does it connect the applicant's background to this specific role using a concrete example, metric, or outcome? Vague claims like 'I have relevant experience' score 1–3.",
+      "weight": 0.30,
+      "scoring_guide": {
+        "1-3": "No concrete connection. Just states they're interested or passionate.",
+        "4-6": "Mentions years of experience or job title but no specific proof.",
+        "7-8": "Connects a specific past project or outcome to the role's needs.",
+        "9-10": "Uses a concrete stat or achievement that directly mirrors what the role requires."
+      }
+    },
+    {
+      "name": "brevity",
+      "description": "Is the message under 5 sentences? Does every sentence earn its place? Filler phrases like 'I hope this message finds you well' or 'I would love to learn more about this exciting opportunity' score 1–3.",
+      "weight": 0.20,
+      "scoring_guide": {
+        "1-3": "Over 6 sentences. Contains filler. Reads like a cover letter crammed into a message.",
+        "4-6": "5–6 sentences but some filler remains.",
+        "7-8": "4–5 tight sentences, no obvious filler.",
+        "9-10": "3–4 sentences. Every word is necessary. Easy to read in 10 seconds."
+      }
+    },
+    {
+      "name": "clear_ask",
+      "description": "Does it end with ONE specific, low-friction ask? 'Would you be open to a 15-minute call this week?' scores 9–10. 'Would love to connect and discuss further' scores 1–3.",
+      "weight": 0.15,
+      "scoring_guide": {
+        "1-3": "No ask, or a vague 'let me know if you're interested' that puts all effort on the reader.",
+        "4-6": "Has an ask but it's high-friction (e.g. 'schedule a full interview') or too vague.",
+        "7-8": "Clear ask with a specific format (call, chat) but missing time specificity.",
+        "9-10": "Single, specific, low-friction ask with a time frame. Easy to say yes to."
+      }
+    }
+  ]
+}

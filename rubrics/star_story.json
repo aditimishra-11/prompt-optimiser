@@ -1,0 +1,26 @@
+{
+  "task": "Given bullet points about a project, write a PM-style STAR story (Situation, Task, Action, Result) suitable for a job interview",
+  "scoring_calibration": "Be strict. Reserve 9-10 only for exceptional outputs a senior PM interviewer would remember. Most outputs should score 5-7.",
+  "dimensions": [
+    {
+      "name": "specificity",
+      "description": "Are outputs specific with concrete examples, numbers, or named technologies? Vague generalities score low. 9-10: must include at least one concrete metric (number, %, $) AND a named technology or method. Missing either = max 6.",
+      "weight": 0.4
+    },
+    {
+      "name": "impact_clarity",
+      "description": "Is the result/outcome clearly stated with measurable or observable impact? Fuzzy outcomes score low. 9-10: result must state a specific quantified business outcome. 'improved performance' with no number = max 5.",
+      "weight": 0.3
+    },
+    {
+      "name": "structure",
+      "description": "Does the output follow STAR format with clear Situation, Task, Action, Result sections? 9-10: must have explicit Situation/Task/Action/Result labels or clearly delineated paragraphs. Missing structure = max 5.",
+      "weight": 0.2
+    },
+    {
+      "name": "conciseness",
+      "description": "Is the output free of padding, filler phrases, and repetition? 9-10: under 150 words total, zero filler sentences. Over 200 words = max 5.",
+      "weight": 0.1
+    }
+  ]
+}
