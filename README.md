@@ -286,18 +286,24 @@ Every run saves a JSON file to `runs/`. Key fields:
 ## Frequently asked questions
 
 **Do I use real data in test cases?**
-No. Test cases are synthetic stress-test inputs written to cover edge cases. Your real CV, JDs, or messages are never used during the optimisation run.
+No. Test cases are synthetic stress-test inputs written to cover edge cases. Your real inputs are never used during the optimisation run — only after you have the best prompt.
 
 **How often do I rerun the agent?**
-Once per use case — unless your needs change (new role type, new industry, new output format). The optimised prompt is stable.
+Once per task type — unless your requirements change (different output format, different audience, different constraints). The optimised prompt is stable until the task itself changes.
 
 **The score isn't improving — what do I do?**
 1. Check the `weakness_log` in the run JSON — if the agent keeps diagnosing the same weakness, the rewriter is stuck
 2. Try a different seed prompt that addresses the stuck dimension directly
 3. Tighten the rubric's 9-10 scoring criteria to give the rewriter a clearer target
 
-**Can I use this for non-job-search tasks?**
-Yes — anything where you have a repeatable prompt task works. Summarisation, email drafting, code review instructions, product critique, customer support responses. Write a rubric + test cases for it and run.
+**What kinds of tasks can I use this for?**
+Anything where you have a repeatable prompt task: summarisation, rewriting, classification, extraction, analysis, drafting, critique, transformation. If you find yourself giving the same instruction to an LLM more than a few times, it's worth optimising.
+
+**How long does a run take?**
+Typically 5–15 minutes depending on the number of test cases, iterations needed, and model speed. Most runs converge in 4–8 iterations.
+
+**Do I need LangSmith?**
+No — it's optional. The agent runs and saves results locally without it. LangSmith adds a visual trace of every iteration, which is useful for debugging why the agent made specific rewrites.
 
 ---
 
